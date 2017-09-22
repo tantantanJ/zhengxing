@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+
+html, body, ul, h1, h2, h3, p, button, ul {
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+html {
+	height: 100%
+}
+
+body {
+	height: 100%
+}
+
+a:link, a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.table-bordered {
+	border: 1px solid #ddd !important;
+}
+
+li {
+	list-style-type: none;
+}
+
+#header .navbar-inverse {
+	border: none
+}
+
+#header .navbar-inner {
+	background-color: #4a8bc2;
+	height: 60px;
+	width: 100%;
+}
+
+#header .sidebar-toggle-box {
+	background: #427dae;
+	float: left;
+	height: 60px;
+	margin-left: -20px;
+	margin-right: 15px;
+	padding: 0 15px;
+}
+
+#header .fa-bars {
+	font-size: 25px;
+	color: #fff;
+	line-height: 60px;
+}
+
+#header .brand {
+	font-size: 20px;
+	line-height: 60px;
+	color: #fff;
+	font-weight: 600;
+}
+
+#container {
+ 	padding-top: 60px; 
+	height: 100%;
+    width: 100%;
+}
+.paddingoverflow{
+	padding-bottom: 65px;
+}
+#sidebar {
+	width: 180px;
+	height: 100%;
+	background: #404040;
+	position: fixed;
+}
+
+#sidebar li {
+	line-height: 50px;
+	border-bottom: 1px solid rgba(84, 84, 84, .17);
+}
+
+#sidebar li>a {
+	color: #fff;
+}
+
+#sidebar .img-icon {
+	padding: 0 15px;
+}
+
+#sidebar li span {
+	display: block;
+	line-height: 50px;
+	width: 180px;
+}
+
+#sidebar li:hover {
+	background-color: #505050;
+}
+
+#main-content {
+	margin-left: 180px;
+	height: 100%;
+	padding: 3px;
+}
+
+.flexMainContainer_Col {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	overflow:hidden;
+}
+
+.flexMainContainer_Row {
+	position: fixed;
+	display: flex;
+	flex-direction: Row;
+	height: 100%;
+	width: 100%;
+	overflow:hidden;
+}
+
+.flexInnerContainer_Col {
+	display: flex;
+	flex-direction: column;
+}
+
+.flexInnerContainer_Row {
+	display: flex;
+	flex-direction: row;
+}
+
+.flexExpanding {
+	flex: 1;
+	justify-content: space-around;
+}
+
+.flexExpanding_Wider {
+	flex: 2;
+	justify-content: space-around;
+}
+
+.flexContent {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	justify-content: space-around;
+}
