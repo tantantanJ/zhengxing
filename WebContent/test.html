@@ -1,122 +1,32 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
 <head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Insert title here</title>
 <link href="css/bootstrap.css" rel="stylesheet" />
 <link href="css/bootstrap-theme.css" rel="stylesheet" />
 <link href="css/font-awesome.css" rel="stylesheet" />
-<link href="css/normalize.css" rel="stylesheet"/>
-<link href="css/main.css" rel="stylesheet" />
-<link href="css/ui.jqgrid-bootstrap.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/ui.jqgrid.css" />
-
-    <meta charset="utf-8" />
-    <title>jqGrid Loading Data - Dialogs - Edit, Add, Delete</title>
+<link rel="stylesheet" href="themes/default/jquery-ui-theme.css"/>
+<link href="css/main.css" rel="stylesheet" />
 </head>
 <body>
-<div style="margin-left:20px">
-    <table id="jqGrid"></table>
-    <div id="jqGridPager"></div>
-</div>
-<script src="js/scripts/jquery-3.1.1.js"></script>
+
+</head>
+<body>
+ 
+<p>Date: <input type="text" class="datepicker"></p>
+	
+<script src="js/scripts/jquery.js"></script>
 <script src="js/scripts/bootstrap.js"></script>
-<script type="text/ecmascript" src="js/scripts/jquery.jqGrid.js"></script>
-<script type="text/ecmascript" src="js/scripts/grid.locale-cn.js"></script>
-<script src="js/scripts/jquery-ui-1.9.2.custom.js"></script>
-<script src="js/mainpage.js"></script>
-	<script>
-		$.jgrid.defaults.width = 780;
-		$.jgrid.defaults.responsive = true;
-		$.jgrid.defaults.styleUI = 'Bootstrap';
-	</script>     
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-			var template = "<div style='margin-left:15px;'><div> Customer ID <sup>*</sup>:</div><div> {CustomerID} </div>";
-			template += "<div> Company Name: </div><div>{CompanyName} </div>";
-			template += "<div> Phone: </div><div>{Phone} </div>";
-			template += "<div> Postal Code: </div><div>{PostalCode} </div>";
-			template += "<div> City:</div><div> {City} </div>";
-			template += "<hr style='width:100%;'/>";
-			template += "<div> {sData} {cData}  </div></div>";
-
-            $("#jqGrid").jqGrid({
-                url: 'data.json',
-				// we set the changes to be made at client side using predefined word clientArray
-                editurl: 'clientArray',
-                datatype: "json",
-                colModel: [
-                    {
-						label: 'Customer ID',
-                        name: 'CustomerID',
-                        width: 75,
-						key: true,
-						editable: true,
-						editrules : { required: true}
-                    },
-                    {
-						label: 'Company Name',
-                        name: 'CompanyName',
-                        width: 140,
-                        editable: true // must set editable to true if you want to make the field editable
-                    },
-                    {
-						label : 'Phone',
-                        name: 'Phone',
-                        width: 100,
-                        editable: true
-                    },
-                    {
-						label: 'Postal Code',
-                        name: 'PostalCode',
-                        width: 80,
-                        editable: true
-                    },
-                    {
-						label: 'City',
-                        name: 'City',
-                        width: 140,
-                        editable: true
-                    }
-                ],
-				sortname: 'CustomerID',
-				sortorder : 'asc',
-				loadonce: true,
-				viewrecords: true,
-                width: 780,
-                height: 200,
-                rowNum: 10,
-                pager: "#jqGridPager"
-            });
-
-            $('#jqGrid').navGrid('#jqGridPager',
-                // the buttons to appear on the toolbar of the grid
-                { edit: true, add: true, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false },
-                // options for the Edit Dialog
-                {
-                    editCaption: "The Edit Dialog",
-					template: template,
-                    errorTextFormat: function (data) {
-                        return 'Error: ' + data.responseText
-                    }
-                },
-                // options for the Add Dialog
-                {
-					template: template,
-                    errorTextFormat: function (data) {
-                        return 'Error: ' + data.responseText
-                    }
-                },
-                // options for the Delete Dailog
-                {
-                    errorTextFormat: function (data) {
-                        return 'Error: ' + data.responseText
-                    }
-                });
-        });
-
-    </script>
-
-    
+<script src="js/scripts/jquery-ui.js"></script>
+<script src="js/scripts/jquery.ui.datepicker-zh-CN.js"></script>
+<script src="js/utils.js"></script>
+  <script>
+  $( function() {
+    $( ".datepicker" ).datepicker();
+  } );
+  </script>
 </body>
 </html>

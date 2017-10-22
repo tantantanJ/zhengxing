@@ -1,35 +1,76 @@
 <div class="need-space row">
-	<label class="col-sm-4">单据编号：</label>
-	<label></label>
+	<div class="col-sm-6">
+		<label class="col-sm-4 title">公司：</label>
+		<select class="col-sm-8" name="gongsibiaoshi" onchange="showDefaultVal('gongsibiaoshi','yewudanyuan')">
+			<option value='' disabled selected style='display:none'>必选项</option>	
+		 	<option value="甲">甲公司</option>
+			<option value="乙">乙公司</option>
+			<option value="丙">丙公司</option>
+		</select>
+	</div>
+	<div class="col-sm-6">	
+		<label class="col-sm-4 title">生产部门：</label>
+	    <select class="col-sm-8" name="bumenbiaoshi" onchange="showDefaultVal('bumenbiaoshi','shengchanbumen')">
+	    	<option value='' disabled selected style='display:none'>必选项</option>	
+	    	<option value="A">A部门</option>
+			<option value="B">B部门</option>
+			<option value="C">C部门</option>
+		</select>
+	</div>
 </div>
-<div class="need-space">
-	<label>业务单元（公司）：</label>
-	<select name="">
-	</select>
-	<label>生产部门：</label>
-    <select name="">
-	</select>
+<div class="need-space row">
+	<div class="col-sm-6">
+		<label class="col-sm-4 title">日期：</label>
+		<input type="text" class="col-sm-8 date-picker-elem riqi" name="riqi" />
+	</div>
+	<div class="col-sm-6">
+		<label class="col-sm-4 title">录入人：</label>
+    	<select class="col-sm-8" name="lururenbiaoshi" onchange="showDefaultVal('lururenbiaoshi','lururen')">
+    		<option value='' disabled selected style='display:none'>必选项</option>	
+    		<option value="赵">赵子龙</option>
+			<option value="钱">钱钟书</option>
+			<option value="孙">孙膑</option>
+			<option value="李">李世民</option>
+			<option value="周">周公</option>
+    	</select>
+	</div>
 </div>
-<div class="need-space">
-	<label>日期：</label>
-	<select name="">
-	</select>
-	<label>录入人：</label>
-    <select name="">
-	</select>
+<div class="need-space row">
+	<div class="col-sm-6">
+	    <label class="col-sm-4 title">物料编码：</label>
+		<select class="col-sm-8" id="test" name="wuliaobiaoshi" onchange="showDefaultVal('wuliaobiaoshi','wuliaobianma','wuliaomingcheng',wuliaoguanxiObj)">
+			<option value='0' style='display:none'>必选项</option>	
+		    <option value="1">1170927</option>
+			<option value="2">2170927</option>
+			<option value="3">3170927</option>
+			<option value="4">4170927</option>
+			<option value="5">5170927</option>
+			<option value="6">6170927</option>
+			<option value="7">7170927</option>
+		</select>
+	</div>
+	<div class="col-sm-6">
+		<label class="col-sm-4 title">物料名称：</label>
+    	<input class="col-sm-8 content-label" name="wuliaomingcheng" style="border:0px" readOnly='true' onfocus=this.blur()></input>
+    </div>
 </div>
-<div class="need-space">
-	<label>物料编码：</label>
-	<select name="">
-	</select>
-	<label>物料名称：</label>
-    <label></label>
+<div class="need-space row">
+	<div class="col-sm-12" style="padding-left:10px;">	
+		<label class="col-sm-2 title">发电量：</label>
+		<input class="col-sm-10 ui-widget-content ui-corner-all" name="fadianliang" type="text" />
+	</div>
 </div>
-<div class="need-space">
-	<label>发电量：</label>
-	<input type="text" />
-	<label>单价（元）：</label>
-	<input type="text" />
-	<label>金额（元）：</label>
-	<input type="text" />
+<div class="need-space row">
+	<div class="col-sm-6">	
+		<label class="col-sm-4 title">单价（元）：</label>
+		<input class="col-sm-8 ui-widget-content ui-corner-all" name="danjia" type="text" />
+	</div>
+	<div class="col-sm-6">
+		<label class="col-sm-4 title">金额（元）：</label>
+		<input class="col-sm-8 ui-widget-content ui-corner-all" name="jine" type="text" />
+	</div>
 </div>
+<input name="yewudanyuan" style="display:none"></input>
+<input name="shengchanbumen" style="display:none"></input>
+<input name="lururen" style="display:none"></input>
+<input name="wuliaobianma" style="display:none"></input>
