@@ -81,6 +81,7 @@ li {
 	height: 100%;
 	background: #404040;
 	position: fixed;
+	z-index: 1;
 }
 
 #sidebar li {
@@ -93,7 +94,7 @@ li {
 }
 
 #sidebar .img-icon {
-	padding: 0 15px;
+	padding: 0 15px 0 15px;
 }
 
 #sidebar li span {
@@ -110,6 +111,8 @@ li {
 	margin-left: 180px;
 	height: 100%;
 	padding: 3px;
+	background: #fff;
+	z-index: 999;
 }
 
 .flexMainContainer_Col {
@@ -170,4 +173,32 @@ li {
 }
 .need-space {
     margin: 5px 0;
+}
+.need-space .showText{
+	border: none;
+}
+.need-space label{
+	font-size: 9px;
+	line-height: 28px;
+	height: 28px;
+}
+.need-space .col-sm-4{
+	padding-left: 0px !important;
+}
+.need-space input{
+	padding:0px 15px;
+	line-height: 28px;
+	height: 28px;
+	border-radius:0px;	
+}
+.need-space select {
+	padding:0px 15px;
+	line-height: 28px;
+	height: 28px;	
+}
+.ui-tooltip{
+	border: none;
+	color: #d10000;
+	background: none;
+	font-weight: 500;
 }

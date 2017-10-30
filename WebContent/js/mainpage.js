@@ -9,6 +9,14 @@ var wuliaoguanxiObj = {
 		6170927:'六类物料',
 		7170927:'七类物料'
 }
+var kehuguanxiObj = {
+		1190921:'华为',
+		1190922:'阿里巴巴',
+		1190923:'十七所',
+		1190924:'成都电视台',
+		1190925:'富森美家居北门',
+		1190926:'来福士',
+}
 $(function(){
 	//页面加载完成之后执行
 	id = GetQueryString("id");
@@ -33,7 +41,7 @@ function FaDianLiangLuRu(){
 				             {label:'录入人', name : 'lururen',width : 80,align:'center'}, 
 				             {label:'物料编码', name : 'wuliaobianma',width : 80,align : "center",}, 
 				             {label:'物料名称', name : 'wuliaomingcheng',width : 150,align : "center"},
-				             {label:'发电量', name : 'fadianliang',width : 80,align : "right"} ,
+				             {label:'发电量（万度）', name : 'fadianliang',width : 80,align : "right"} ,
 				             {label:'单价', name : 'danjia',width : 80,align : "right",formatter:'currency'} ,
 				             {label:'金额', name : 'jine',width : 80,align : "right",formatter:'currency'},
 				             {label:'公司标识', name : 'gongsibiaoshi',width : 80,align : "right",hidden: "true"} ,
@@ -68,20 +76,20 @@ function FaDianLiangLuRu(){
 	jQuery("#rowed").jqGrid('navButtonAdd', "#pager", {caption:'新增',title:'新增项。', 
 		id: gridId + '_newFaDianLiangDanJu', buttonicon :'fa fa-plus',
 		onClickButton:function(){
-			manipulateGongCheng('新增');
+			manipulateGongCheng('新增','FaDianLiangLuRu');
 			
 		} 
 	});
 	jQuery("#rowed").jqGrid('navButtonAdd', "#pager", {caption:'修改',title:'修改选中项。', 
 		id: gridId + '_editFaDianLiangDanJu', buttonicon :'fa fa-pencil-square-o',
 		onClickButton:function(){
-			manipulateGongCheng('编辑');
+			manipulateGongCheng('编辑','FaDianLiangLuRu');
 		} 
 	});
 	jQuery("#rowed").jqGrid('navButtonAdd', "#pager", {caption:'删除',title:'删除选中项。', 
 		id: gridId + '_delFaDianLiangDanJu', buttonicon :'fa fa-trash',
 		onClickButton:function(){
-			manipulateGongCheng('删除');
+			manipulateGongCheng('删除','FaDianLiangLuRu');
 		} 
 	});
 	$('#gbox_rowed').addClass('paddingoverflow');
@@ -93,28 +101,31 @@ function JieSuanDianLiangLuRu(){
 	$('#main_content').html('<table id="rowed"></table>'+'<div id="pager" ></div>');
 	jQuery("#rowed").jqGrid(
 			{   
-				url : 'data/JSONData.json',//组件创建完成之后请求数据的url
+				url : 'data/jiesuandianliang.json',//组件创建完成之后请求数据的url
 				styleUI : 'Bootstrap',
 				datatype : "json",//请求数据返回的类型。可选json,xml,txt
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-				             {label:'业务单元（公司）', name : 'yewudanyuan',width : 160,editable: true,edittype : "select",editoptions : {value : "0:A公司;1:B公司;2:C公司"},align:'center',}, 
-				             {label:'单据编号', name : 'danjubianhao',width : 90,editable: true,align : "center"}, 
-				             {label:'部门', name : 'shengchanbumen',width : 100,editable: true,edittype : "select",editoptions : {value : "0:A部门;1:B部门;2:C部门"},align:'center'}, 
-				             {label:'日期', name : 'sdate',width : 100,editable : true,sorttype : "date",align : "center"}, 
-				             {label:'客户编码', name : 'lururen',width : 80,align:'center'}, 
-				             {label:'客户名称', name : 'lururen',width : 80,align:'center'}, 
-				             {label:'物料编码', name : 'wuliaobianma',width : 80,align : "center",editable : true,editoptions : {size : 25}}, 
-				             {label:'物料名称', name : 'wuliaomingcheng',width : 150,editoptions : {readonly : true,size : 10}},
-				             {label:'结算电量', name : 'fadianliang',width : 80,editable : true,editoptions : {size : 25},align : "right"} ,
-				             {label:'标杆单价', name : 'danjia',width : 80,editable : true,editoptions : {size : 25},align : "right",formatter:'currency'} ,
-				             {label:'标杆金额', name : 'danjia',width : 80,editable : true,editoptions : {size : 25},align : "right",formatter:'currency'} ,
-				             {label:'补贴单价', name : 'danjia',width : 80,editable : true,editoptions : {size : 25},align : "right",formatter:'currency'} ,
-				             {label:'补贴金额', name : 'danjia',width : 80,editable : true,editoptions : {size : 25},align : "right",formatter:'currency'} ,
-				           ],
+				             {label:'业务单元（公司）', name : 'yewudanyuan',width : 160,align:'center',}, 
+				             {label:'单据编号', name : 'danjubianhao',width : 90,align : "center"}, 
+				             {label:'部门', name : 'shengchanbumen',width : 100,align:'center'}, 
+				             {label:'日期', name : 'riqi',width : 100,sorttype : "date",align : "center"}, 
+				             {label:'客户编码', name : 'kehubianma',width : 80,align:'center'}, 
+				             {label:'客户名称', name : 'kehumingcheng',width : 80,align:'center'}, 
+				             {label:'物料编码', name : 'wuliaobianma',width : 80,align : "center",}, 
+				             {label:'物料名称', name : 'wuliaomingcheng',width : 100,align : "center",},
+				             {label:'结算电量', name : 'jiesuandianliang',width : 80,align : "right"} ,
+				             {label:'标杆单价', name : 'biaogandanjia',width : 80,align : "right",formatter:'currency'} ,
+				             {label:'标杆金额', name : 'biaoganjine',width : 80,align : "right",formatter:'currency'} ,
+				             {label:'补贴单价', name : 'butiedanjia',width : 80,align : "right",formatter:'currency'} ,
+				             {label:'补贴金额', name : 'butiejine',width : 80,formatter:'currency'} ,
+				             {label:'公司标识', name : 'gongsibiaoshi',width : 80,align : "right",hidden: "true"} ,
+				             {label:'部门标识', name : 'bumenbiaoshi',width : 80,align : "right",hidden: "true"} ,
+				             {label:'物料标识', name : 'wuliaobiaoshi',width : 80,align : "right",hidden: "true"} ,
+				             {label:'客户标识', name : 'kehubiaoshi',width : 80,align : "right",hidden: "true"} ,
+			             ],
 				onSelectRow : function(id) {
 		          if (id && id !== lastsel3) {
 		            jQuery('#rowed').jqGrid('restoreRow', lastsel3);
-		            jQuery('#rowed').jqGrid('editRow', id, true, pickdates);
 		            lastsel3 = id;
 		          }
 		        },
@@ -139,20 +150,20 @@ function JieSuanDianLiangLuRu(){
 	jQuery("#rowed").jqGrid('navButtonAdd', "#pager", {caption:'新增',title:'新增项。', 
 		id: gridId + '_newFaDianLiangDanJu', buttonicon :'fa fa-plus',
 		onClickButton:function(){
-			manipulateGongCheng('新增');
+			manipulateGongCheng('新增','JieSuanDianLiangLuRu');
 			
 		} 
 	});
 	jQuery("#rowed").jqGrid('navButtonAdd', "#pager", {caption:'修改',title:'修改选中项。', 
 		id: gridId + '_editFaDianLiangDanJu', buttonicon :'fa fa-pencil-square-o',
 		onClickButton:function(){
-			manipulateGongCheng('编辑');
+			manipulateGongCheng('编辑','JieSuanDianLiangLuRu');
 		} 
 	});
 	jQuery("#rowed").jqGrid('navButtonAdd', "#pager", {caption:'删除',title:'删除选中项。', 
 		id: gridId + '_delFaDianLiangDanJu', buttonicon :'fa fa-trash',
 		onClickButton:function(){
-			manipulateGongCheng('删除');
+			manipulateGongCheng('删除','JieSuanDianLiangLuRu');
 		} 
 	});
 	$('#gbox_rowed').addClass('paddingoverflow');
@@ -181,9 +192,8 @@ function DianLiangChanXiaoCunLuRu(){
 				           ],
 				onSelectRow : function(id) {
 		          if (id && id !== lastsel3) {
-		            jQuery('#rowed').jqGrid('restoreRow', lastsel3);
-		            jQuery('#rowed').jqGrid('editRow', id, true, pickdates);
-		            lastsel3 = id;
+			            jQuery('#rowed').jqGrid('restoreRow', lastsel3);
+			            lastsel3 = id;
 		          }
 		        },
 				rowNum : 1000,//一页显示多少条
@@ -232,17 +242,23 @@ function flexingGrid(gridId) {
 	$('#gview_' + gridId).addClass('flexExpanding flexInnerContainer_Col');
 }
 
-function manipulateGongCheng(strAction){
+function manipulateGongCheng(strAction,strTableType){
+	var templatePage = '';
+	if(strTableType == "FaDianLiangLuRu"){
+		templatePage = 'templates/fadianliangluru.html';
+	}else if(strTableType == "JieSuanDianLiangLuRu"){
+		templatePage = 'templates/jiesuandianliangluru.html';
+	}
 	if (strAction === '新增') {
-		newProject();
+		newProject(strTableType,templatePage);
 	} else if (strAction === '编辑') {
-		editProject();
+		editProject(strTableType,templatePage);
 	} else if (strAction === '删除') {
-		deleteProject();
+		deleteProject(strTableType);
 	} 
-	function newProject(){
+	function newProject(strTableType,templatePage){
 		var newProjectDialog = document.createElement('div');
-		$.get('templates/fadianliangluru.html', function(data){
+		$.get(templatePage, function(data){
 			newProjectDialog.innerHTML = data;
 			$(newProjectDialog).dialog({
 				title: '新增单据',
@@ -250,7 +266,9 @@ function manipulateGongCheng(strAction){
 				position: { my: "center", at: "center", of: window },
 				buttons: {
 			 		"确定" :	function() {
+			 			if (!checkValidation(newProjectDialog)) return;
 			 			addRowData(newProjectDialog);
+//						同时拿到最新的页面数据写入后台
 			 			closeDialog(this);
 			 		},
 					"退出" : function() {
@@ -263,10 +281,19 @@ function manipulateGongCheng(strAction){
 			$(newProjectDialog).dialog({
 				position: { my: "center", at: "center", of: window },
 			});
+		
+			if(strTableType == "FaDianLiangLuRu"){
+				$("#DanJia").bind('keyup',jineCountFadianlianglurudan);
+				$("#FaDianLiang").bind('keyup',jineCountFadianlianglurudan);
+			}else if(strTableType == "JieSuanDianLiangLuRu"){
+				$("#JieSuanDianLiang").bind('keyup',jineCountJiesuandianlianglurudan);
+				$("#BiaoGanDanJia").bind('keyup',jineCountJiesuandianlianglurudan);
+				$("#BuTieDanJia").bind('keyup',jineCountJiesuandianlianglurudan);
+			}
 		},'text');
 		newProjectDialog.className='dialog-body';
 	}
-	function editProject(){
+	function editProject(strTableType,templatePage){
 		var gridId = "#rowed";
 		var selectedId = $(gridId).jqGrid('getGridParam', 'selrow');
 		if (!selectedId) {
@@ -275,7 +302,7 @@ function manipulateGongCheng(strAction){
 		}
 		var theData = $(gridId).jqGrid('getRowData', selectedId);
 		var editDialog = document.createElement('div');
-		$.get('templates/fadianliangluru.html', function(data){
+		$.get(templatePage, function(data){
 			editDialog.innerHTML = data;
 			fillElementsWithData(theData,editDialog);
 			$(editDialog).dialog({
@@ -285,6 +312,7 @@ function manipulateGongCheng(strAction){
 				buttons: {
 					"确定" :	function() {
 						editRowData(editDialog,selectedId);
+//						同时拿到最新的页面数据写入后台
 						closeDialog(this);
 					},
 					"退出" : function() {
@@ -308,7 +336,7 @@ function manipulateGongCheng(strAction){
 			return;
 		}
 		var deleteDialog = document.createElement('div');
-		deleteDialog.innerHtml =  "<div style='height:20px,width:30px'>你在执行删除操作，如果是误操作点击”取消“按钮，点击”确认“完成删除</div>";
+		deleteDialog.append("你在执行删除操作，如果是误操作点击”取消“按钮，点击”确认“完成删除");
 		$(deleteDialog).dialog({
 			title: '删除单据',
 			width: 710,
@@ -316,6 +344,7 @@ function manipulateGongCheng(strAction){
 			buttons: {
 				"确定" :	function() {
 					deleteRowData(deleteDialog,selectedId);
+//					同时拿到最新的页面数据写入后台
 					closeDialog(this);
 				},
 				"取消" : function() {
@@ -379,6 +408,10 @@ function sidebarChecked(strAction){
 /*新增行*/
 function addRowData(newProjectDialog){
     var willGoingData = serializeObject(newProjectDialog);
+    willGoingData.danjia = currencyUnformat(willGoingData.danjia);
+    willGoingData.jine = currencyUnformat(willGoingData.jine);
+ //***此从为伪造单据编号
+    willGoingData.danjubianhao = "12113";
     jQuery("#rowed").jqGrid("addRowData",11,willGoingData,"last");
 }
 
@@ -391,4 +424,25 @@ function editRowData(editDialog,selectedId) {
 /*删除行*/
 function deleteRowData(deleteDialog,selectedId){
 	jQuery("#rowed").jqGrid("delRowData",selectedId);
+}
+/*计算行*/
+function jineCountFadianlianglurudan(){
+	var fadianliangNum = $('#FaDianLiang').val();
+	var danjiaNum = currencyUnformat($('#DanJia').val());
+	if(!fadianliangNum) fadianliangNum = [];
+	if(!danjiaNum) danjiaNum = [];
+	var jineNum = fadianliangNum*danjiaNum;
+	$('#JinE').val(currencyFormatted(jineNum,true,''));
+}
+function jineCountJiesuandianlianglurudan(){
+	var jiesuandianliangNum = $('#JieSuanDianLiang').val();
+	var biaogandanjiaNum = currencyUnformat($('#BiaoGanDanJia').val());
+	var butiedanjiaNum = currencyUnformat($('#BuTieDanJia').val());
+	if(!jiesuandianliangNum) jiesuandianliangNum = [];
+	if(!biaogandanjiaNum) biaogandanjiaNum = [];
+	if(!butiedanjiaNum) butiedanjiaNum = [];
+	var biaoganjineNum = jiesuandianliangNum*biaogandanjiaNum;
+	var butiejineNum = jiesuandianliangNum*butiedanjiaNum;
+	$('#BiaoGanJinE').val(currencyFormatted(biaoganjineNum,true,''));
+	$('#BuTieJinE').val(currencyFormatted(butiejineNum,true,''));
 }
